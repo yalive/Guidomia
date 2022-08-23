@@ -27,13 +27,18 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
+        freeCompilerArgs += [
+                "-Xjvm-default=all",
+        ]
         jvmTarget = '1.8'
     }
 
     buildFeatures {
         viewBinding = true
     }
+
 }
+
 
 dependencies {
 
@@ -44,4 +49,14 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // Google Gson to parse json file
+    implementation("com.google.code.gson:gson:2.8.9")
+
+    // AndroidX viewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
+
+    // To use by viewModels delegate function
+    implementation 'androidx.fragment:fragment-ktx:1.5.2'
+
 }
