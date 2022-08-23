@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/light_gary"
+    android:paddingBottom="@dimen/spacing_medium">
+
+    <ImageView
+        android:id="@+id/imgCar"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:contentDescription="@null"
+        app:layout_constraintDimensionRatio="3:2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/range_rover" />
+
+    <TextView
+        android:id="@+id/txtCarName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/text_size_large"
+        app:layout_constraintStart_toEndOf="@+id/imgCar"
+        app:layout_constraintTop_toTopOf="@id/imgCar"
+        tools:text="Range Rover" />
+
+    <TextView
+        android:id="@+id/txtCarPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color"
+        app:layout_constraintStart_toStartOf="@+id/txtCarName"
+        app:layout_constraintTop_toBottomOf="@+id/txtCarName"
+        tools:text="Price: 125k" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/txtCarName"
+        app:layout_constraintTop_toBottomOf="@+id/txtCarPrice"
+        tools:rating="3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

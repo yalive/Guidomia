@@ -7,4 +7,20 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--
+        Orange : #FC6016
+        Dark gray : #858585
+        Light gray : #D5D5D5
+        Line : 4px
+        Text : black 45%
+        Bullet point text : black
+    -->
+
+    <color name="orange">#FC6016</color>
+    <color name="orange_dark">#C12C00</color>
+    <color name="dark_gary">#858585</color>
+    <color name="light_gary">#D5D5D5</color>
+    <color name="text_color">#73000000</color>
+
 </resources>
