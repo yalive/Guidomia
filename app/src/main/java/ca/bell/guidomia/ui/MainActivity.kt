@@ -20,7 +20,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         ManualDI.initIfNecessary(applicationContext)
         setContentView(binding.root)
-        binding.recyclerView.adapter = CarsAdapter()
+        binding.recyclerView.adapter = CarsAdapter(onClickCar = { car ->
+            viewModel.onClickCar(car)
+        })
         binding.recyclerView.addDivider(showLast = false)
         observeViewModel()
     }

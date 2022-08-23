@@ -5,48 +5,129 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/light_gary"
-    android:paddingBottom="@dimen/spacing_medium">
+    android:foreground="?selectableItemBackground">
 
-    <ImageView
-        android:id="@+id/imgCar"
-        android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="@dimen/spacing_medium"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:contentDescription="@null"
-        app:layout_constraintDimensionRatio="3:2"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/spacing_medium"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/range_rover" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/txtCarName"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/imgCar"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:contentDescription="@null"
+            app:layout_constraintDimensionRatio="3:2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/range_rover" />
+
+        <TextView
+            android:id="@+id/txtCarName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_large"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintStart_toEndOf="@+id/imgCar"
+            app:layout_constraintTop_toTopOf="@id/imgCar"
+            tools:text="Range Rover" />
+
+        <TextView
+            android:id="@+id/txtCarPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            app:layout_constraintStart_toStartOf="@+id/txtCarName"
+            app:layout_constraintTop_toBottomOf="@+id/txtCarName"
+            tools:text="Price: 125k" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            app:layout_constraintStart_toStartOf="@+id/txtCarName"
+            app:layout_constraintTop_toBottomOf="@+id/txtCarPrice"
+            tools:rating="3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/detailView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_large"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="@color/text_color"
-        android:textSize="@dimen/text_size_large"
-        app:layout_constraintStart_toEndOf="@+id/imgCar"
-        app:layout_constraintTop_toTopOf="@id/imgCar"
-        tools:text="Range Rover" />
+        android:paddingBottom="@dimen/spacing_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainView">
 
-    <TextView
-        android:id="@+id/txtCarPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/text_color"
-        app:layout_constraintStart_toStartOf="@+id/txtCarName"
-        app:layout_constraintTop_toBottomOf="@+id/txtCarName"
-        tools:text="Price: 125k" />
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/prosGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="txtProsTitle,prosContainer" />
 
-    <RatingBar
-        android:id="@+id/ratingBar"
-        style="@style/Widget.AppCompat.RatingBar.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/txtCarName"
-        app:layout_constraintTop_toBottomOf="@+id/txtCarPrice"
-        tools:rating="3" />
 
+        <TextView
+            android:id="@+id/txtProsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_xxx_large"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:fontFamily="sans-serif-medium"
+            android:text="Pros:"
+            android:textColor="@color/text_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/prosContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/txtProsTitle"
+            app:layout_constraintTop_toBottomOf="@+id/txtProsTitle" />
+
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/consGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="txtConsTitle,consContainer" />
+
+        <TextView
+            android:id="@+id/txtConsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_xxx_large"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:fontFamily="sans-serif-medium"
+            android:text="Cons:"
+            android:textColor="@color/text_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/prosContainer" />
+
+        <LinearLayout
+            android:id="@+id/consContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/txtConsTitle"
+            app:layout_constraintTop_toBottomOf="@+id/txtConsTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

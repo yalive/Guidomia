@@ -17,8 +17,16 @@ class MainViewModel(
 
     private fun prepareCars() = viewModelScope.launch {
         val carList = repository.getCarsList()
-        val carUiModels = carList.map { car -> CarUiModel(car) }
+        val carUiModels = carList.mapIndexed { index, car ->
+            CarUiModel(car = car, expanded = index == 0)
+        }
         _cars.value = carUiModels
+    }
+
+    fun onClickCar(car: CarUiModel) {
+        _cars.value = cars.value?.map {
+            it.copy(expanded = car.identifier == it.identifier)
+        }
     }
 
 
