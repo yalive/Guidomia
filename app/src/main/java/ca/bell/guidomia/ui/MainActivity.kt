@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     private fun observeViewModel() {
         observe(viewModel.cars) { cars ->
             val adapter = binding.recyclerView.adapter as CarsAdapter
-            adapter.cars = cars
+            adapter.submitList(cars)
         }
     }
 }

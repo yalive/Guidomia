@@ -4,6 +4,7 @@ import android.graphics.Typeface
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
 import ca.bell.guidomia.R
 import ca.bell.guidomia.common.color
@@ -16,12 +17,7 @@ class CarsAdapter(
     private val onClickCar: (CarUiModel) -> Unit
 ) : RecyclerView.Adapter<CarsAdapter.ViewHolder>() {
 
-    // TODO: Use diff util
-    var cars: List<CarUiModel> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+    private val differ = AsyncListDiffer(this, CarDiffUtil())
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarsAdapter.ViewHolder {
         val binding = ItemCarBinding.inflate(parent.inflater, parent, false)
@@ -29,11 +25,15 @@ class CarsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val car = cars[position]
+        val car = differ.currentList[position]
         holder.bind(car)
     }
 
-    override fun getItemCount() = cars.size
+    override fun getItemCount() = differ.currentList.size
+
+    fun submitList(newList: List<CarUiModel>, callback: () -> Unit = {}) {
+        differ.submitList(newList, callback)
+    }
 
     inner class ViewHolder(
         private val binding: ItemCarBinding
