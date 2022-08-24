@@ -1,7 +1,7 @@
 package ca.bell.guidomia.ui
 
 import androidx.annotation.DrawableRes
-import ca.bell.guidomia.data.CarRS
+import ca.bell.guidomia.data.Car
 import ca.bell.guidomia.data.image
 import java.util.*
 
@@ -17,7 +17,7 @@ data class CarUiModel(
     val expanded: Boolean
 ) {
     companion object {
-        operator fun invoke(car: CarRS, expanded: Boolean) = CarUiModel(
+        operator fun invoke(car: Car, expanded: Boolean) = CarUiModel(
             identifier = UUID.randomUUID().toString(),
             name = car.model,
             make = car.make,

@@ -1,7 +1,7 @@
 package ca.bell.guidomia.ui
 
 import androidx.lifecycle.*
-import ca.bell.guidomia.data.GuidomiaRepository
+import ca.bell.guidomia.data.repository.GuidomiaRepository
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -70,7 +70,7 @@ class MainViewModel(
     }
 
     private fun prepareUiCars() = viewModelScope.launch {
-        val carList = repository.getCarsList()
+        val carList = repository.getCars()
         val carUiModels = carList.mapIndexed { index, car ->
             CarUiModel(car = car, expanded = index == 0)
         }
