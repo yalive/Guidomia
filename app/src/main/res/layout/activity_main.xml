@@ -30,7 +30,7 @@
             android:layout_marginBottom="-10dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/tacoma_title"
-            android:textColor="?colorSurface"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_xxlarge"
             app:layout_constraintBottom_toTopOf="@+id/txtDescription"
             app:layout_constraintStart_toStartOf="parent" />
@@ -42,7 +42,7 @@
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginBottom="@dimen/spacing_xx_large"
             android:text="@string/tacoma_description"
-            android:textColor="?colorSurface"
+            android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/imgLogo"
             app:layout_constraintStart_toStartOf="@+id/txtTitle" />

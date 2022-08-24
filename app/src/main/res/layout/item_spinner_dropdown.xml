@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:letterSpacing="0.01"
     android:padding="8dp"
-    android:textColor="@color/text_color"
+    android:textColor="?colorOnSurface"
     android:textSize="@dimen/text_size_micro"
     app:fontFamily="sans-serif-medium"
     tools:text="title" />
