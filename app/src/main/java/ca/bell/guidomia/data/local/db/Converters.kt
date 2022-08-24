@@ -21,6 +21,7 @@ class StringToListConverter {
 
     @TypeConverter
     fun fromString(value: String): List<String> {
+        if (value.isEmpty()) return emptyList()
         return value.split(separator)
     }
 
