@@ -4,4 +4,7 @@
     <string name="tacoma_description">Get your\'s now</string>
 
     <string name="car_price">Price: %dk</string>
+    <string name="cons">Cons:</string>
+    <string name="pros">Pros:</string>
+    <string name="filters">Filters</string>
 </resources>
