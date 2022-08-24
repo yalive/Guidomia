@@ -1,6 +1,7 @@
 package ca.bell.guidomia.ui
 
 import android.graphics.Typeface
+import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -27,6 +28,15 @@ class CarsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val car = differ.currentList[position]
         holder.bind(car)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
+        if (payloads.isNotEmpty() && payloads[0] is Bundle) {
+            val expanded = (payloads[0] as Bundle).getBoolean("expanded", false)
+            holder.toggleDetailsView(expanded)
+            return
+        }
+        super.onBindViewHolder(holder, position, payloads)
     }
 
     override fun getItemCount() = differ.currentList.size
@@ -70,6 +80,10 @@ class CarsAdapter(
             itemView.setOnClickListener {
                 onClickCar(carUiModel)
             }
+        }
+
+        fun toggleDetailsView(expanded: Boolean) {
+            binding.detailView.isVisible = expanded
         }
 
         private fun bulletTextView(text: String): TextView {
