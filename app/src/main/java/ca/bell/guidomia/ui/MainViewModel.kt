@@ -1,6 +1,8 @@
 package ca.bell.guidomia.ui
 
 import androidx.lifecycle.*
+import ca.bell.guidomia.common.event.Event
+import ca.bell.guidomia.common.event.trigger
 import ca.bell.guidomia.data.repository.GuidomiaRepository
 import kotlinx.coroutines.launch
 
@@ -17,6 +19,9 @@ class MainViewModel(
     private val _carModels = MutableLiveData<List<String>>()
     val carModels: LiveData<List<String>> get() = _carModels
 
+    private val _loading = MutableLiveData<Event<Boolean>>()
+    val loading: LiveData<Event<Boolean>> get() = _loading
+
     private var allCars = emptyList<CarUiModel>()
 
     private val modelsByMaker = mutableMapOf<String, List<String>>()
@@ -31,8 +36,8 @@ class MainViewModel(
 
     fun onClickCar(car: CarUiModel) {
         allCars = allCars.map { it.copy(expanded = car.identifier == it.identifier) }
-        _cars.value = cars.value?.map {
-            it.copy(expanded = car.identifier == it.identifier)
+        _cars.value = cars.value?.map { uiModel ->
+            uiModel.copy(expanded = car.identifier == uiModel.identifier)
         }
     }
 
@@ -70,6 +75,7 @@ class MainViewModel(
     }
 
     private fun prepareUiCars() = viewModelScope.launch {
+        _loading.trigger(true)
         val carList = repository.getCars()
         val carUiModels = carList.mapIndexed { index, car ->
             CarUiModel(car = car, expanded = index == 0)
@@ -77,6 +83,7 @@ class MainViewModel(
         allCars = carUiModels
         _cars.value = carUiModels
         initFilters()
+        _loading.trigger(false)
     }
 
     private fun initFilters() {

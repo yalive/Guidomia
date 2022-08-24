@@ -3,10 +3,8 @@ package ca.bell.guidomia.ui
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import ca.bell.guidomia.common.addDivider
-import ca.bell.guidomia.common.doOnItemSelected
-import ca.bell.guidomia.common.observe
-import ca.bell.guidomia.common.viewBinding
+import androidx.core.view.isVisible
+import ca.bell.guidomia.common.*
 import ca.bell.guidomia.databinding.ActivityMainBinding
 import ca.bell.guidomia.di.ManualDI
 
@@ -42,6 +40,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
+        observeEvent(viewModel.loading) { loading ->
+            binding.progressBar.isVisible = loading
+        }
+
         observe(viewModel.cars) { cars ->
             val adapter = binding.recyclerView.adapter as CarsAdapter
             adapter.submitList(cars)
