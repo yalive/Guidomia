@@ -1,8 +1,12 @@
 package ca.bell.guidomia.ui
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import ca.bell.guidomia.R
 import ca.bell.guidomia.common.*
 import ca.bell.guidomia.databinding.ActivityMainBinding
 import ca.bell.guidomia.di.injector
@@ -18,6 +22,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupView()
         observeViewModel()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_main) {
+            Toast.makeText(this, R.string.app_name, Toast.LENGTH_SHORT).show()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setupView() = with(binding) {
