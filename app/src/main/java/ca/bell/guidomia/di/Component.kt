@@ -19,7 +19,7 @@ interface AppComponent {
         ): AppComponent
     }
 
-    val mainViewModelFactory: MainViewModel.Factory
+    val mainViewModel: MainViewModel
 }
 
 

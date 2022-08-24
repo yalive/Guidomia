@@ -1,6 +1,9 @@
 package ca.bell.guidomia.ui
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import ca.bell.guidomia.common.event.Event
 import ca.bell.guidomia.common.event.trigger
 import ca.bell.guidomia.data.repository.GuidomiaRepository
@@ -105,18 +108,6 @@ class MainViewModel @Inject constructor(
 
         // No make is selected, so there is no model to choose
         _carModels.value = listOf(ANY_MODEL)
-    }
-
-    class Factory @Inject constructor(
-        private val repository: GuidomiaRepository
-    ) : ViewModelProvider.Factory {
-
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-                return MainViewModel(repository) as T
-            }
-            throw IllegalArgumentException("Unknown ViewModel class")
-        }
     }
 
     companion object {

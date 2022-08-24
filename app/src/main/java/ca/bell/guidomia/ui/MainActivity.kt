@@ -1,7 +1,6 @@
 package ca.bell.guidomia.ui
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import ca.bell.guidomia.common.*
@@ -12,9 +11,7 @@ import ca.bell.guidomia.di.injector
 class MainActivity : AppCompatActivity() {
 
     private val binding by viewBinding(ActivityMainBinding::inflate)
-    private val viewModel by viewModels<MainViewModel> {
-        injector.mainViewModelFactory
-    }
+    private val viewModel by viewModel { injector.mainViewModel }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
