@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/light_gary"
-    android:foreground="?selectableItemBackground">
+    android:foreground="?selectableItemBackground"
+    tools:layout_marginTop="@dimen/spacing_normal">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainView"
@@ -26,7 +27,7 @@
             app:layout_constraintDimensionRatio="3:2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/range_rover" />
+            tools:src="@sample/cars.json/data/image" />
 
         <TextView
             android:id="@+id/txtCarName"
@@ -38,7 +39,7 @@
             android:textSize="@dimen/text_size_large"
             app:layout_constraintStart_toEndOf="@+id/imgCar"
             app:layout_constraintTop_toTopOf="@id/imgCar"
-            tools:text="Range Rover" />
+            tools:text="@sample/cars.json/data/model" />
 
         <TextView
             android:id="@+id/txtCarPrice"
@@ -47,7 +48,7 @@
             android:textColor="@color/text_color"
             app:layout_constraintStart_toStartOf="@+id/txtCarName"
             app:layout_constraintTop_toBottomOf="@+id/txtCarName"
-            tools:text="Price: 125k" />
+            tools:text="@sample/cars.json/data/price" />
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -57,7 +58,7 @@
             android:numStars="5"
             app:layout_constraintStart_toStartOf="@+id/txtCarName"
             app:layout_constraintTop_toBottomOf="@+id/txtCarPrice"
-            tools:rating="3" />
+            tools:rating="@sample/cars.json/data/rating" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
