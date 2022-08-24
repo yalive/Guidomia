@@ -5,8 +5,9 @@ import ca.bell.guidomia.common.event.Event
 import ca.bell.guidomia.common.event.trigger
 import ca.bell.guidomia.data.repository.GuidomiaRepository
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(
+class MainViewModel @Inject constructor(
     private val repository: GuidomiaRepository
 ) : ViewModel() {
 
@@ -106,7 +107,7 @@ class MainViewModel(
         _carModels.value = listOf(ANY_MODEL)
     }
 
-    class Factory(
+    class Factory @Inject constructor(
         private val repository: GuidomiaRepository
     ) : ViewModelProvider.Factory {
 

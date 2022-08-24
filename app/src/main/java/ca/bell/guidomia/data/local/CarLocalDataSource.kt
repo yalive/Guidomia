@@ -3,8 +3,9 @@ package ca.bell.guidomia.data.local
 import ca.bell.guidomia.data.Car
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class CarLocalDataSource(
+class CarLocalDataSource @Inject constructor(
     private val carDao: CarDao
 ) {
 
