@@ -31,10 +31,9 @@ class MainViewModel @Inject constructor(
     private val modelsByMake = mutableMapOf<String, List<String>>()
 
     init {
-        prepareUiCars()
-
         _carMakes.value = listOf(ANY_MAKE)
         _carModels.value = listOf(ANY_MODEL)
+        prepareUiCars()
     }
 
 
