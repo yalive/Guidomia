@@ -1,21 +1,24 @@
-package ca.bell.guidomia.data
+package ca.bell.guidomia.data.remote
 
 import android.content.Context
+import ca.bell.guidomia.data.Car
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.nio.charset.Charset
 
-class GuidomiaRepository(
+class CarRemoteDataSource(
     private val gson: Gson,
     private val appContext: Context
 ) {
 
-    suspend fun getCarsList(): List<CarRS> {
+    suspend fun getCarList(): List<Car> {
+        delay(3_000)
         val json = loadStringJSONFromAsset("car_list.json")
-        return gson.from(json)
+        return gson.from<List<CarRS>>(json).map(CarRS::toCar)
     }
 
     private suspend fun loadStringJSONFromAsset(
