@@ -47,16 +47,61 @@
             app:layout_constraintBottom_toBottomOf="@id/imgLogo"
             app:layout_constraintStart_toStartOf="@+id/txtTitle" />
 
+        <LinearLayout
+            android:id="@+id/filterView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:background="@drawable/bg_filter_view"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/spacing_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgLogo">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:text="@string/filters"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_large" />
+
+            <Spinner
+                android:id="@+id/makeSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_large"
+                android:background="@null" />
+
+            <Spinner
+                android:id="@+id/modelSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginEnd="@dimen/spacing_large"
+                android:background="@null" />
+
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_x_large"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imgLogo"
+            app:layout_constraintTop_toBottomOf="@id/filterView"
             tools:itemCount="6"
             tools:listitem="@layout/item_car" />
 

@@ -8,6 +8,7 @@ import java.util.*
 data class CarUiModel(
     val identifier: String,
     val name: String,
+    val make: String,
     val price: Int,
     val rating: Int,
     @DrawableRes val image: Int,
@@ -19,6 +20,7 @@ data class CarUiModel(
         operator fun invoke(car: CarRS, expanded: Boolean) = CarUiModel(
             identifier = UUID.randomUUID().toString(),
             name = car.model,
+            make = car.make,
             price = car.marketPrice.toInt() / 1000,
             rating = car.rating,
             image = car.image,
