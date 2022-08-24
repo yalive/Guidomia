@@ -17,8 +17,8 @@ class MainViewModel @Inject constructor(
     private val _cars = MutableLiveData<List<CarUiModel>>()
     val cars: LiveData<List<CarUiModel>> get() = _cars
 
-    private val _carMakers = MutableLiveData<List<String>>()
-    val carMakers: LiveData<List<String>> get() = _carMakers
+    private val _carMakes = MutableLiveData<List<String>>()
+    val carMakes: LiveData<List<String>> get() = _carMakes
 
     private val _carModels = MutableLiveData<List<String>>()
     val carModels: LiveData<List<String>> get() = _carModels
@@ -28,12 +28,12 @@ class MainViewModel @Inject constructor(
 
     private var allCars = emptyList<CarUiModel>()
 
-    private val modelsByMaker = mutableMapOf<String, List<String>>()
+    private val modelsByMake = mutableMapOf<String, List<String>>()
 
     init {
         prepareUiCars()
 
-        _carMakers.value = listOf(ANY_MAKE)
+        _carMakes.value = listOf(ANY_MAKE)
         _carModels.value = listOf(ANY_MODEL)
     }
 
@@ -47,10 +47,10 @@ class MainViewModel @Inject constructor(
 
     fun onSelectMake(position: Int) {
         // Find selected make
-        val make = _carMakers.value.orEmpty().getOrNull(position) ?: return
+        val make = _carMakes.value.orEmpty().getOrNull(position) ?: return
 
         // Get all models of the selected make
-        _carModels.value = modelsByMaker[make].orEmpty().toMutableList()
+        _carModels.value = modelsByMake[make].orEmpty().toMutableList()
 
         // Update car list with current make
         _cars.value = when (make) {
@@ -62,16 +62,16 @@ class MainViewModel @Inject constructor(
     fun onSelectModel(position: Int, selectedMakePosition: Int) {
         // Find selected model
         val model = _carModels.value.orEmpty().getOrNull(position) ?: return
-        val make = _carMakers.value.orEmpty().getOrNull(selectedMakePosition) ?: return
+        val make = _carMakes.value.orEmpty().getOrNull(selectedMakePosition) ?: return
 
-        val makerCars = when (make) {
+        val makeCars = when (make) {
             ANY_MAKE -> allCars
             else -> allCars.filter { it.make == make }
         }
 
         val modelCars = when (model) {
-            ANY_MODEL -> makerCars
-            else -> makerCars.filter { it.name == model }
+            ANY_MODEL -> makeCars
+            else -> makeCars.filter { it.name == model }
         }
 
         // Update car list with current make and model
@@ -95,16 +95,16 @@ class MainViewModel @Inject constructor(
         val allMaks = allCars.groupBy { it.make }
 
         // Order of insertion will be preserved (Linked Hash map)
-        modelsByMaker[ANY_MAKE] = listOf(ANY_MODEL)
+        modelsByMake[ANY_MAKE] = listOf(ANY_MODEL)
         allMaks.forEach { entry ->
             val make = entry.key
             val models = entry.value.map { it.name }.distinct().toMutableList()
             models.add(0, ANY_MODEL)
-            modelsByMaker[make] = models
+            modelsByMake[make] = models
         }
 
         // Make list
-        _carMakers.value = modelsByMaker.keys.toList()
+        _carMakes.value = modelsByMake.keys.toList()
 
         // No make is selected, so there is no model to choose
         _carModels.value = listOf(ANY_MODEL)

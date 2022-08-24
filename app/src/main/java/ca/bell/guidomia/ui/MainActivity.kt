@@ -63,8 +63,8 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(cars)
         }
 
-        observe(viewModel.carMakers) { makers ->
-            binding.makeSpinner.adapter = SpinnerArrayAdapter(this, makers)
+        observe(viewModel.carMakes) { makes ->
+            binding.makeSpinner.adapter = SpinnerArrayAdapter(this, makes)
         }
 
         observe(viewModel.carModels) { models ->
