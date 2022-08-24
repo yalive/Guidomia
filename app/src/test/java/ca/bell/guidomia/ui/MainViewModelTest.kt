@@ -7,6 +7,7 @@ import ca.bell.guidomia.data.repository.GuidomiaRepository
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -25,7 +26,7 @@ class MainViewModelTest {
     private val repository = mockk<GuidomiaRepository>()
 
     @Test
-    fun `Cars loaded and first one is expanded`() {
+    fun `Cars loaded and first one is expanded`() = runTest {
         // Given
         coEvery { repository.getCars() } returns cars
 
@@ -38,75 +39,79 @@ class MainViewModelTest {
     }
 
     @Test
-    fun `By default make filter contains all makes, and model filter contains only Any model`() {
-        // Given
-        coEvery { repository.getCars() } returns cars
+    fun `By default make filter contains all makes, and model filter contains only Any model`() =
+        runTest {
+            // Given
+            coEvery { repository.getCars() } returns cars
 
-        // When: default init of viewModel
-        val viewModel = MainViewModel(repository)
+            // When: default init of viewModel
+            val viewModel = MainViewModel(repository)
 
-        // Then: cars loaded and first
-        assertEquals(viewModel.carMakes.value, listOf(ANY_MAKE, MAKE_1, MAKE_2))
-        assertEquals(viewModel.carModels.value, listOf(ANY_MODEL))
-    }
-
-    @Test
-    fun `When click a car it should expand, and the previously expanded should collapse`() {
-        // Given
-        coEvery { repository.getCars() } returns cars
-        val viewModel = MainViewModel(repository)
-
-        // When
-        val clickedCarPosition = 1
-        viewModel.onClickCar(viewModel.cars.value!![clickedCarPosition])
-
-        // Then: the car should expand and previous should collapse
-        viewModel.cars.value!!.forEachIndexed { index, carUiModel ->
-            assertEquals(carUiModel.expanded, clickedCarPosition == index)
+            // Then: cars loaded and first
+            assertEquals(viewModel.carMakes.value, listOf(ANY_MAKE, MAKE_1, MAKE_2))
+            assertEquals(viewModel.carModels.value, listOf(ANY_MODEL))
         }
-    }
 
     @Test
-    fun `On select a make, the car list should contains this make cars only, also model filter contains selected make models`() {
-        // Given
-        coEvery { repository.getCars() } returns cars
-        val viewModel = MainViewModel(repository)
+    fun `When click a car it should expand, and the previously expanded should collapse`() =
+        runTest {
+            // Given
+            coEvery { repository.getCars() } returns cars
+            val viewModel = MainViewModel(repository)
 
-        val selectedMake = MAKE_1
-        val selectedMakeModels = listOf(ANY_MODEL, MODEL_1_1, MODEL_1_2)
+            // When
+            val clickedCarPosition = 1
+            viewModel.onClickCar(viewModel.cars.value!![clickedCarPosition])
 
-        // When
-        viewModel.onSelectMake(1)
-
-        // Then: Car list contains only selected make cars
-        assertEquals(viewModel.cars.value!!.size, 2)
-        viewModel.cars.value!!.forEach {
-            assertEquals(it.make, selectedMake)
+            // Then: the car should expand and previous should collapse
+            viewModel.cars.value!!.forEachIndexed { index, carUiModel ->
+                assertEquals(carUiModel.expanded, clickedCarPosition == index)
+            }
         }
-        assertEquals(viewModel.cars.value!![0].name, MODEL_1_1)
-        assertEquals(viewModel.cars.value!![1].name, MODEL_1_2)
-
-        // Also model list contains only selected make models
-        assertEquals(viewModel.carModels.value, selectedMakeModels)
-    }
 
     @Test
-    fun `On select a model of a given make, the car list should contains only this model`() {
-        // Given
-        coEvery { repository.getCars() } returns cars
-        val viewModel = MainViewModel(repository)
+    fun `On select a make, the car list should contains this make cars only, also model filter contains selected make models`() =
+        runTest {
+            // Given
+            coEvery { repository.getCars() } returns cars
+            val viewModel = MainViewModel(repository)
 
-        val selectedMake = MAKE_2
+            val selectedMake = MAKE_1
+            val selectedMakeModels = listOf(ANY_MODEL, MODEL_1_1, MODEL_1_2)
 
-        // When
-        viewModel.onSelectMake(2)
-        viewModel.onSelectModel(position = 1, selectedMakePosition = 2)
+            // When
+            viewModel.onSelectMake(1)
 
-        // Then: Car list contains only selected make cars
-        assertEquals(viewModel.cars.value!!.size, 1)
-        assertEquals(viewModel.cars.value!![0].make, selectedMake)
-        assertEquals(viewModel.cars.value!![0].name, MODEL_2_1)
-    }
+            // Then: Car list contains only selected make cars
+            assertEquals(viewModel.cars.value!!.size, 2)
+            viewModel.cars.value!!.forEach {
+                assertEquals(it.make, selectedMake)
+            }
+            assertEquals(viewModel.cars.value!![0].name, MODEL_1_1)
+            assertEquals(viewModel.cars.value!![1].name, MODEL_1_2)
+
+            // Also model list contains only selected make models
+            assertEquals(viewModel.carModels.value, selectedMakeModels)
+        }
+
+    @Test
+    fun `On select a model of a given make, the car list should contains only this model`() =
+        runTest {
+            // Given
+            coEvery { repository.getCars() } returns cars
+            val viewModel = MainViewModel(repository)
+
+            val selectedMake = MAKE_2
+
+            // When
+            viewModel.onSelectMake(2)
+            viewModel.onSelectModel(position = 1, selectedMakePosition = 2)
+
+            // Then: Car list contains only selected make cars
+            assertEquals(viewModel.cars.value!!.size, 1)
+            assertEquals(viewModel.cars.value!![0].make, selectedMake)
+            assertEquals(viewModel.cars.value!![0].name, MODEL_2_1)
+        }
 }
 
 private const val ANY_MAKE = "Any make"
