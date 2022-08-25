@@ -3,11 +3,8 @@ package ca.bell.guidomia.data.repository
 import ca.bell.guidomia.data.Car
 import ca.bell.guidomia.data.local.CarLocalDataSource
 import ca.bell.guidomia.data.remote.CarRemoteDataSource
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class GuidomiaRepository @Inject constructor(
+class GuidomiaRepository(
     private val localDataSource: CarLocalDataSource,
     private val remoteDataSource: CarRemoteDataSource
 ) {

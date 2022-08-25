@@ -1,20 +1,18 @@
 package ca.bell.guidomia
 
 import android.app.Application
-import ca.bell.guidomia.di.DaggerAppComponent
+import ca.bell.guidomia.di.dataModule
+import ca.bell.guidomia.di.viewModelModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class MainApp : Application() {
 
-    val appComponent by lazy { DaggerAppComponent.factory().create(this) }
-
     override fun onCreate() {
         super.onCreate()
-        INSTANC = this
-    }
-
-    companion object {
-        private lateinit var INSTANC: MainApp
-
-        fun get() = INSTANC
+        startKoin {
+            androidContext(this@MainApp)
+            modules(viewModelModule, dataModule)
+        }
     }
 }

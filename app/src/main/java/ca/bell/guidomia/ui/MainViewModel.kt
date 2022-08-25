@@ -8,9 +8,8 @@ import ca.bell.guidomia.common.event.Event
 import ca.bell.guidomia.common.event.trigger
 import ca.bell.guidomia.data.repository.GuidomiaRepository
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class MainViewModel @Inject constructor(
+class MainViewModel(
     private val repository: GuidomiaRepository
 ) : ViewModel() {
 

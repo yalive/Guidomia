@@ -9,9 +9,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.nio.charset.Charset
-import javax.inject.Inject
 
-class CarRemoteDataSource @Inject constructor(
+class CarRemoteDataSource(
     private val gson: Gson,
     private val appContext: Context
 ) {
