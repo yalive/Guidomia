@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             binding.makeSpinner.adapter = SpinnerArrayAdapter(this, makes)
         }
 
-        observe(viewModel.carModels) { models ->
+        observe(viewModel.makeModels) { models ->
             binding.modelSpinner.adapter = SpinnerArrayAdapter(this, models)
         }
     }

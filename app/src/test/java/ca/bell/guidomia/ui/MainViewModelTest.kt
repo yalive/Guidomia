@@ -49,7 +49,7 @@ class MainViewModelTest {
 
             // Then: cars loaded and first
             assertEquals(viewModel.carMakes.value, listOf(ANY_MAKE, MAKE_1, MAKE_2))
-            assertEquals(viewModel.carModels.value, listOf(ANY_MODEL))
+            assertEquals(viewModel.makeModels.value, listOf(ANY_MODEL))
         }
 
     @Test
@@ -91,7 +91,7 @@ class MainViewModelTest {
             assertEquals(viewModel.cars.value!![1].name, MODEL_1_2)
 
             // Also model list contains only selected make models
-            assertEquals(viewModel.carModels.value, selectedMakeModels)
+            assertEquals(viewModel.makeModels.value, selectedMakeModels)
         }
 
     @Test

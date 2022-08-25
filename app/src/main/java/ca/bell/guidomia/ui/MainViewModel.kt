@@ -20,8 +20,8 @@ class MainViewModel @Inject constructor(
     private val _carMakes = MutableLiveData<List<String>>()
     val carMakes: LiveData<List<String>> get() = _carMakes
 
-    private val _carModels = MutableLiveData<List<String>>()
-    val carModels: LiveData<List<String>> get() = _carModels
+    private val _makeModels = MutableLiveData<List<String>>()
+    val makeModels: LiveData<List<String>> get() = _makeModels
 
     private val _loading = MutableLiveData<Event<Boolean>>()
     val loading: LiveData<Event<Boolean>> get() = _loading
@@ -32,7 +32,7 @@ class MainViewModel @Inject constructor(
 
     init {
         _carMakes.value = listOf(ANY_MAKE)
-        _carModels.value = listOf(ANY_MODEL)
+        _makeModels.value = listOf(ANY_MODEL)
         prepareUiCars()
     }
 
@@ -49,7 +49,11 @@ class MainViewModel @Inject constructor(
         val make = _carMakes.value.orEmpty().getOrNull(position) ?: return
 
         // Get all models of the selected make
-        _carModels.value = modelsByMake[make].orEmpty().toMutableList()
+        val models = modelsByMake[make]
+        _makeModels.value = when {
+            models.isNullOrEmpty() -> listOf(ANY_MODEL)
+            else -> models
+        }
 
         // Update car list with current make
         _cars.value = when (make) {
@@ -60,7 +64,7 @@ class MainViewModel @Inject constructor(
 
     fun onSelectModel(position: Int, selectedMakePosition: Int) {
         // Find selected model
-        val model = _carModels.value.orEmpty().getOrNull(position) ?: return
+        val model = _makeModels.value.orEmpty().getOrNull(position) ?: return
         val make = _carMakes.value.orEmpty().getOrNull(selectedMakePosition) ?: return
 
         val makeCars = when (make) {
@@ -106,7 +110,7 @@ class MainViewModel @Inject constructor(
         _carMakes.value = modelsByMake.keys.toList()
 
         // No make is selected, so there is no model to choose
-        _carModels.value = listOf(ANY_MODEL)
+        _makeModels.value = listOf(ANY_MODEL)
     }
 
     companion object {
