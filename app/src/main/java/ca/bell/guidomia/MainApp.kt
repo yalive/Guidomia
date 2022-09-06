@@ -9,12 +9,12 @@ class MainApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        INSTANC = this
+        INSTANCE = this
     }
 
     companion object {
-        private lateinit var INSTANC: MainApp
+        private lateinit var INSTANCE: MainApp
 
-        fun get() = INSTANC
+        fun get() = INSTANCE
     }
 }

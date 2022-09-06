@@ -1,7 +1,6 @@
 package ca.bell.guidomia.ui
 
 import android.graphics.Typeface
-import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -31,8 +30,9 @@ class CarsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
-        if (payloads.isNotEmpty() && payloads[0] is Bundle) {
-            val expanded = (payloads[0] as Bundle).getBoolean("expanded", false)
+        val payload = payloads.getOrNull(0)
+        if (payload is CarItemToggled) {
+            val expanded = payload.expanded
             holder.toggleDetailsView(expanded)
             return
         }
